@@ -1,0 +1,55 @@
+<html lang="fr">
+
+<head>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <script src="lib/leader-line.min.js"></script>
+
+
+    <meta charset="UTF-8">
+
+
+</head>
+
+<body>
+    <inventory>
+
+    </inventory>
+    <container>
+        <proof>
+            <space></space>
+            <theorem>\(\sqrt 2\) is irrational.</theorem>
+            <proof>
+                <explanation>We proceed by contradiction.</explanation>
+                <hypothesis>Suppose \(\sqrt 2\) is rational.</hypothesis>
+                There exists some integers \(a\) and \(b\) such that:
+                <statement thus id="irreducible">\(\sqrt 2 = \frac a b\) irreducible</statement>
+                <explanation>By squaring each side, we obtain:</explanation>
+                <statement thus>\(2 = \left(\frac {a} b\right)^2\)</statement>
+                <statement thus>\(2 = \frac {a^2} {b^2}\) </statement>
+                <statement thus id="$2b^2 = a^2$"> \(2b^2 = a^2\)</statement>
+                <statement thus id="a^2"> \(a^2\) is even.</statement>
+                <theorem class="right" id="lemma">\(a^2\) even implies \(a\) even.</theorem>
+                <proof>
+                    <hypothesis>Suppose \(a\) is odd.</hypothesis>
+                    <statement thus>\(a = 2k+1\) for some integer \(k\)</statement>
+                    <statement thus>\(a^2 = 4k^2+4k+1\)</statement>
+                    <statement thus>\(a^2\) is odd</statement>
+                </proof>
+                <statement id="aeven" by="lemma,a^2"> \(a\) is even.</statement>
+                <statement thus id="a=2k"> \(a = 2k\) for some \(k\)</statement>
+                <statement by="$2b^2 = a^2$,a=2k"> \(2b^2 = 4k^2\)</statement>
+                <statement thus> \(b^2 = 2k^2\)</statement>
+                <statement thus id="b^2"> \(b^2\) is even</statement>
+                <statement id="beven" by="lemma,b^2"> \(b\) is even</statement>
+                <statement id="contradiction" by="irreducible,aeven,beven"> Contradiction </statement>
+            </proof>
+        </proof>
+    </container>
+
+
+
+</body>
+<script src="main.js"></script>
+
+</html>
