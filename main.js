@@ -11,12 +11,13 @@ function getCurrentStatement() {
     return currentStatements[currentStatements.length - 1];
 }
 
-function* getCauses(element) {
+
+function getDirectCause(element) {
     if (element.getAttribute("thus") != undefined) {
         function getPreviousStatement(element) {
             let el = element.previousElementSibling
-            for(let i = 0; i < 5; i++) {
-                if (el.tagName == "STATEMENT" || el.tagName == "HYPOTHESIS")
+            for (let i = 0; i < 5; i++) {
+                if (el.tagName == "STATEMENT" || el.tagName == "HYPOTHESIS"|| el.tagName == "THEOREM")
                     return el;
                 el = el.previousElementSibling;
             }
@@ -24,11 +25,14 @@ function* getCauses(element) {
         }
 
         const p = getPreviousStatement(element);
-        console.log(p)
         if (p)
-            yield p;
-
+            return p;
     }
+    return undefined;
+}
+
+
+function* getCauses(element) {
     const by = element.getAttribute("by");
     if (by)
         for (const el of by.split(",").map((id) => document.getElementById(id))) {
@@ -66,12 +70,30 @@ document.querySelector("container").addEventListener('scroll', () => {
     if (currentStatement == undefined) return;
     currentStatement.classList.add("current");
 
+
+    const directCause = getDirectCause(currentStatement);
+
+    if (directCause) {
+        directCause.classList.add("cause");
+        lines.push(new LeaderLine(
+            LeaderLine.pointAnchor(directCause, {
+                x: 40,
+                y: directCause.getBoundingClientRect().height,
+            }),
+            LeaderLine.pointAnchor(currentStatement, {
+                x: 40,
+                y: 0,
+            }),
+            { color: '#FFFFFF88', outlineColor: 'orange', endPlugColor: 'orange', dropShadow: false, outline: true, path: "fluid" }
+        ));
+    }
+
     for (const el of getCauses(currentStatement)) {
         el.classList.add("cause");
         lines.push(new LeaderLine(
             el,
             currentStatement
-            , {  color: 'white',outlineColor: 'orange',endPlugColor: 'orange', dropShadow: false, outline: true, path: "magnet" }
+            , { color: '#FFFFFF88', outlineColor: 'orange', endPlugColor: 'orange', dropShadow: false, outline: true, path: "magnet" }
         ));
     }
 
