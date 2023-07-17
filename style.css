@@ -25,6 +25,7 @@ statement {
     margin-bottom: 64px;
     background-color: rgb(147, 255, 152);
     text-align: center;
+    width: fit-content;
 
 }
 
@@ -35,8 +36,23 @@ theorem {
     display: block;
     padding: 8px;
     background-color: rgb(255, 172, 172);
+    border: 2px solid red;
     text-align: center;
+    width: fit-content;
 
+
+}
+
+
+.theoremCurrentlyProven {
+    position: sticky;
+    top: 0px;
+    z-index: 10000;
+}
+
+
+theorem:hover {
+    z-index: 1000000001;
 }
 
 hypothesis {
@@ -46,24 +62,31 @@ hypothesis {
     margin-bottom: 64px;
     background-color: rgb(175, 238, 255);
     text-align: center;
+    width: fit-content;
+
 }
 
 container {
     overflow-y: scroll;
     display: inline-block;
     height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 proof {
-    display: inline-block;
+    display: flex;
     padding-left: 16px;
-    border-left: 2px dashed rgb(255, 172, 172);
-    border-bottom: 2px dashed rgb(255, 172, 172);
-    margin-bottom:32px;
+    margin-left:8px;
+    border-left: 2px solid rgb(246, 114, 114);
+    border-bottom: 2px solid rgb(246, 114, 114);
+    margin-bottom: 32px;
+    flex-direction: column;
 }
 
 .right {
     right: 0px;
+    float: right;
 }
 
 explanation {
@@ -74,7 +97,7 @@ explanation {
 
 inventory {
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     padding: 8px;
     margin: 0px;
     z-index: 100;
@@ -96,5 +119,11 @@ inventory theorem {
 
 
 .cause {
-    border: 4px solid orange;
+    border: 2px solid black;
+}
+
+
+
+.newcommand {
+    display: none;
 }

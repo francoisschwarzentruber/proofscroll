@@ -17,7 +17,7 @@ function getDirectCause(element) {
         function getPreviousStatement(element) {
             let el = element.previousElementSibling
             for (let i = 0; i < 5; i++) {
-                if (el.tagName == "STATEMENT" || el.tagName == "HYPOTHESIS"|| el.tagName == "THEOREM")
+                if (el.tagName == "STATEMENT" || el.tagName == "HYPOTHESIS" || el.tagName == "THEOREM")
                     return el;
                 el = el.previousElementSibling;
             }
@@ -44,6 +44,18 @@ document.querySelector("container").addEventListener('scroll', () => {
     [...document.querySelectorAll(".current")].forEach((el) => el.classList.remove("current"));
     [...document.querySelectorAll(".cause")].forEach((el) => el.classList.remove("cause"));
 
+    [...document.querySelectorAll("theorem")].forEach((th) => {
+        const proof = th.nextElementSibling;
+        if (proof == null)
+            return;
+        console.log(proof.getBoundingClientRect().bottom)
+
+        if (proof.tagName == "PROOF" && proof.getBoundingClientRect().bottom > 32) {
+            th.classList.add("theoremCurrentlyProven");
+        }
+        else
+            th.classList.remove("theoremCurrentlyProven");
+    });
     for (const line of lines)
         line.remove();
 
@@ -84,7 +96,7 @@ document.querySelector("container").addEventListener('scroll', () => {
                 x: 40,
                 y: 0,
             }),
-            { color: '#FFFFFF88', outlineColor: 'orange', endPlugColor: 'orange', dropShadow: false, outline: true, path: "fluid" }
+            { color: '#FFFFFF88', outlineColor: 'black', endPlugColor: 'black', dropShadow: false, outline: true, path: "fluid" }
         ));
     }
 
@@ -93,9 +105,19 @@ document.querySelector("container").addEventListener('scroll', () => {
         lines.push(new LeaderLine(
             el,
             currentStatement
-            , { color: '#FFFFFF88', outlineColor: 'orange', endPlugColor: 'orange', dropShadow: false, outline: true, path: "magnet" }
+            , {
+                color: '#FFFFFF88',
+                startSocket: el.parentElement == inventory ? 'bottom' : 'right',
+                endSocket: el.parentElement == inventory ? 'right' : 'right',
+                outlineColor: 'black', endPlugColor: 'black', dropShadow: false, outline: true, path: "fluid"
+            }
         ));
     }
 
 
 });
+
+
+
+
+

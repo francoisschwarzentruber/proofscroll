@@ -8,8 +8,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
 </head>
 
@@ -18,34 +18,32 @@
 
     </inventory>
     <container>
+        <space>Scroll down</space>
+        <theorem>\(\sqrt 2\) is irrational.</theorem>
         <proof>
-            <space>Scroll down</space>
-            <theorem>\(\sqrt 2\) is irrational.</theorem>
-            <proof>
-                <explanation>We proceed by contradiction.</explanation>
-                <hypothesis>Suppose \(\sqrt 2\) is rational.</hypothesis>
-                <explanation>There exists some integers \(a\) and \(b\) such that:</explanation>
-                <statement thus id="irreducible">\(\sqrt 2 = \frac a b\) irreducible</statement>
-                <explanation>By squaring each side, we obtain:</explanation>
-                <statement thus>\(2 = \left(\frac {a} b\right)^2\)</statement>
-                <statement thus>\(2 = \frac {a^2} {b^2}\) </statement>
-                <statement thus id="$2b^2 = a^2$"> \(2b^2 = a^2\)</statement>
-                <statement thus id="a^2"> \(a^2\) is even.</statement>
-                <theorem class="right" id="lemma">\(a^2\) even implies \(a\) even.</theorem>
-                <proof>
-                    <hypothesis>Suppose \(a\) is odd.</hypothesis>
-                    <statement thus>\(a = 2k+1\) for some integer \(k\)</statement>
-                    <statement thus>\(a^2 = 4k^2+4k+1\)</statement>
-                    <statement thus>\(a^2\) is odd</statement>
-                </proof>
-                <statement id="aeven" by="a^2,lemma"> \(a\) is even.</statement>
-                <statement thus id="a=2k"> \(a = 2k\) for some \(k\)</statement>
-                <statement thus by="$2b^2 = a^2$"> \(2b^2 = 4k^2\)</statement>
-                <statement thus> \(b^2 = 2k^2\)</statement>
-                <statement thus id="b^2"> \(b^2\) is even</statement>
-                <statement thus id="beven" by="lemma"> \(b\) is even</statement>
-                <statement thus id="contradiction" by="irreducible,aeven"> Contradiction </statement>
+            <explanation>We proceed by contradiction.</explanation>
+            <hypothesis>Suppose \(\sqrt 2\) is rational.</hypothesis>
+            <explanation>There exists some integers \(a\) and \(b\) such that:</explanation>
+            <statement thus id="irreducible">\(\sqrt 2 = \frac a b\) irreducible</statement>
+            <explanation>By squaring each side, we obtain:</explanation>
+            <statement thus>\(2 = \left(\frac {a} b\right)^2\)</statement>
+            <statement thus>\(2 = \frac {a^2} {b^2}\) </statement>
+            <statement thus id="$2b^2 = a^2$"> \(2b^2 = a^2\)</statement>
+            <statement thus id="a^2"> \(a^2\) is even.</statement>
+            <theorem class="right" id="lemma">\(a^2\) even implies \(a\) even.</theorem>
+            <proof class="right">
+                <hypothesis>Suppose \(a\) is odd.</hypothesis>
+                <statement thus>\(a = 2k+1\) for some integer \(k\)</statement>
+                <statement thus>\(a^2 = 4k^2+4k+1\)</statement>
+                <statement thus>\(a^2\) is odd</statement>
             </proof>
+            <statement id="aeven" by="a^2,lemma"> \(a\) is even.</statement>
+            <statement thus id="a=2k"> \(a = 2k\) for some \(k\)</statement>
+            <statement thus by="$2b^2 = a^2$"> \(2b^2 = 4k^2\)</statement>
+            <statement thus> \(b^2 = 2k^2\)</statement>
+            <statement thus id="b^2"> \(b^2\) is even</statement>
+            <statement thus id="beven" by="lemma"> \(b\) is even</statement>
+            <statement thus id="contradiction" by="irreducible,aeven"> Contradiction </statement>
         </proof>
         <space>Scroll up</space>
     </container>
@@ -54,5 +52,5 @@
 
 </body>
 <script src="main.js"></script>
-
+<script src="load.js"></script>
 </html>
