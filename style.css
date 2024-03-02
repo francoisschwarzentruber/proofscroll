@@ -72,6 +72,15 @@ container {
     width: 100%;
 }
 
+header {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+    z-index: 10000;
+    pointer-events: none;
+}
+
 proof {
     display: flex;
     padding-left: 8px;
@@ -124,6 +133,7 @@ inventory {
     right: 0px;
 }
 
+
 inventory statement,
 inventory theorem {
     display: inline-block;
@@ -154,4 +164,8 @@ inventory theorem {
 
 .leader-line {
     z-index: 100000001;
+}
+
+.hidden {
+    opacity: 0;
 }

@@ -1,3 +1,4 @@
+const header = document.querySelector("header");
 const inventory = document.querySelector("inventory");
 const container = document.querySelector("container");
 let lines = [];
@@ -44,22 +45,45 @@ document.querySelector("container").addEventListener('scroll', () => {
     [...document.querySelectorAll(".current")].forEach((el) => el.classList.remove("current"));
     [...document.querySelectorAll(".cause")].forEach((el) => el.classList.remove("cause"));
 
+    header.innerHTML = "";
+    const currentStatement = getCurrentStatement();
+
+
+    [...document.querySelectorAll("proof")].forEach((proof) => {
+        if (currentStatement != undefined && proof.getBoundingClientRect().bottom < currentStatement.getBoundingClientRect().top) {
+            proof.classList.add("hidden");
+        }
+        else
+            proof.classList.remove("hidden");
+
+    });
     [...document.querySelectorAll("theorem")].forEach((th) => {
         const proof = th.nextElementSibling;
         if (proof == null)
             return;
 
+        const proofRectangle = proof.getBoundingClientRect();
+
+        if (proof.tagName == "PROOF" &&
+            !proof.classList.contains("hidden") &&
+            proofRectangle.top < th.clientHeight + header.clientHeight &&
+            proofRectangle.bottom > header.clientHeight) {
+            const thClone = th.cloneNode(true);
+            thClone.style.marginLeft = th.getBoundingClientRect().left + "px";
+            thClone.style.visibility = "visible";
+            header.appendChild(thClone);
+            th.style.visibility = "hidden";
+        }
+        else
+            th.style.visibility = "visible";
+        /**
         if (proof.tagName == "PROOF" && proof.getBoundingClientRect().bottom > 32) {
             th.classList.add("theoremCurrentlyProven");
         }
         else
-            th.classList.remove("theoremCurrentlyProven");
+            th.classList.remove("theoremCurrentlyProven"); */
     });
-    for (const line of lines)
-        line.remove();
-
-    lines = [];
-    const currentStatement = getCurrentStatement();
+    
     const statementsInFlow = [...document.querySelectorAll("container statement , container theorem")];
 
     const statementsAfter = statementsInFlow.filter(
@@ -85,6 +109,11 @@ document.querySelector("container").addEventListener('scroll', () => {
 
     const directCause = getDirectCause(currentStatement);
 
+    for (const line of lines)
+        line.remove();
+
+    lines = [];
+    
     if (directCause) {
         directCause.classList.add("cause");
         lines.push(new LeaderLine(
