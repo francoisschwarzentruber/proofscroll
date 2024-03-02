@@ -3,7 +3,7 @@ const container = document.querySelector("container");
 let lines = [];
 
 function getCurrentStatement() {
-    const currentStatements = [...document.querySelectorAll("statement")].filter((el) => {
+    const currentStatements = [...document.querySelectorAll("container statement")].filter((el) => {
         const r = el.getBoundingClientRect();
         return r.top > 0 && r.bottom < window.innerHeight;
     });
@@ -89,11 +89,11 @@ document.querySelector("container").addEventListener('scroll', () => {
         directCause.classList.add("cause");
         lines.push(new LeaderLine(
             LeaderLine.pointAnchor(directCause, {
-                x: 40,
+                x: 20,
                 y: directCause.getBoundingClientRect().height,
             }),
             LeaderLine.pointAnchor(currentStatement, {
-                x: 40,
+                x: 20,
                 y: 0,
             }),
             { color: '#FFFFFF88', outlineColor: 'black', endPlugColor: 'black', dropShadow: false, outline: true, path: "fluid" }
@@ -107,7 +107,7 @@ document.querySelector("container").addEventListener('scroll', () => {
             currentStatement
             , {
                 color: '#FFFFFF88',
-                startSocket: el.parentElement == inventory ? 'bottom' : 'right',
+                startSocket: el.parentElement == inventory ? 'left' : 'right',
                 endSocket: el.parentElement == inventory ? 'right' : 'right',
                 outlineColor: 'black', endPlugColor: 'black', dropShadow: false, outline: true, path: "fluid"
             }
