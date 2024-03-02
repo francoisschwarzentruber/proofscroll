@@ -48,7 +48,6 @@ document.querySelector("container").addEventListener('scroll', () => {
         const proof = th.nextElementSibling;
         if (proof == null)
             return;
-        console.log(proof.getBoundingClientRect().bottom)
 
         if (proof.tagName == "PROOF" && proof.getBoundingClientRect().bottom > 32) {
             th.classList.add("theoremCurrentlyProven");
@@ -61,11 +60,12 @@ document.querySelector("container").addEventListener('scroll', () => {
 
     lines = [];
     const currentStatement = getCurrentStatement();
+    const statementsInFlow = [...document.querySelectorAll("container statement , container theorem")];
 
-    const statementsAfter = [...document.querySelectorAll("container statement , container theorem")]
-        .filter((el) => el.getBoundingClientRect().top >= (currentStatement ? currentStatement.getBoundingClientRect().top : 0));
+    const statementsAfter = statementsInFlow.filter(
+        (el) => el.getBoundingClientRect().top >= (currentStatement ? currentStatement.getBoundingClientRect().top : 0));
 
-    const relevantStatementsBefore = [...document.querySelectorAll("container statement,container theorem")].filter((el) => {
+    const relevantStatementsBefore = statementsInFlow.filter((el) => {
         if (!el.id) return false;
 
         //if el is not useful for the future of the proof => remove
@@ -73,11 +73,11 @@ document.querySelector("container").addEventListener('scroll', () => {
             .filter((elA) => !elA.getAttribute("by") ? false : elA.getAttribute("by").indexOf(el.id) >= 0)
             .length == 0)
             return false;
-        return el.getBoundingClientRect().top < container.offsetTop;
+        return el.getBoundingClientRect().top < container.offsetTop;//el.getBoundingClientRect().top < container.offsetTop;
     });
 
     inventory.innerHTML = "";
-    relevantStatementsBefore.forEach((el) => inventory.appendChild(el.cloneNode(true)));
+    relevantStatementsBefore.forEach((el) => inventory.prepend(el.cloneNode(true)));
 
     if (currentStatement == undefined) return;
     currentStatement.classList.add("current");

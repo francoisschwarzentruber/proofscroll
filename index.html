@@ -23,7 +23,7 @@
         <proof>
             <explanation>We proceed by contradiction.</explanation>
             <hypothesis>Suppose \(\sqrt 2\) is rational.</hypothesis>
-            <explanation>There exists some integers \(a\) and \(b\) such that:</explanation>
+            <explanation>There exist some integers \(a\) and \(b\) such that:</explanation>
             <statement thus id="irreducible">\(\sqrt 2 = \frac a b\) irreducible</statement>
             <explanation>By squaring each side, we obtain:</explanation>
             <statement thus>\(2 = \left(\frac {a} b\right)^2\)</statement>
@@ -32,8 +32,10 @@
             <statement thus id="a^2"> \(a^2\) is even.</statement>
             <theorem class="right" id="lemma">\(a^2\) even implies \(a\) even.</theorem>
             <proof class="right">
+                <explanation>By contrapositive.</explanation>
                 <hypothesis>Suppose \(a\) is odd.</hypothesis>
                 <statement thus>\(a = 2k+1\) for some integer \(k\)</statement>
+                <explanation>By squaring:</explanation>
                 <statement thus>\(a^2 = 4k^2+4k+1\)</statement>
                 <statement thus>\(a^2\) is odd</statement>
             </proof>

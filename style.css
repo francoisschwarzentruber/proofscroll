@@ -36,12 +36,11 @@ theorem {
     display: block;
     padding: 8px;
     background-color: rgb(255, 172, 172);
-    border: 2px solid red;
     text-align: center;
     width: fit-content;
-
-
 }
+
+
 
 
 .theoremCurrentlyProven {
@@ -78,10 +77,26 @@ proof {
     display: flex;
     padding-left: 16px;
     margin-left:8px;
-    border-left: 2px solid rgb(246, 114, 114);
-    border-bottom: 2px solid rgb(246, 114, 114);
+    border-left: 2px solid rgb(255, 172, 172);
+    border-bottom: 2px solid rgb(255, 172, 172);
     margin-bottom: 32px;
     flex-direction: column;
+    opacity: 1;
+}
+
+
+
+
+proof:before {
+    margin-top: 16px;
+    content: "Proof.";
+    font-weight: bold;
+}
+
+proof:after {
+    border:1px solid black;
+    width:16px;
+    height:16px;
 }
 
 .right {
@@ -100,11 +115,12 @@ inventory {
     flex-direction: row-reverse;
     padding: 8px;
     margin: 0px;
-    z-index: 100;
+    z-index: 100000;
     top: 0px;
+    right:0px;
     overflow: visible;
-    filter: brightness(0.8);
-}
+    position:absolute;
+}   
 
 inventory statement,
 inventory theorem {
@@ -126,4 +142,12 @@ inventory theorem {
 
 .newcommand {
     display: none;
+}
+
+
+
+
+
+.leader-line {
+    z-index: 100000001;
 }
