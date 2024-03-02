@@ -48,7 +48,11 @@ document.querySelector("container").addEventListener('scroll', () => {
     header.innerHTML = "";
     const currentStatement = getCurrentStatement();
 
-
+    if (currentStatement) {
+        inventory.style.bottom = document.body.getBoundingClientRect().bottom - currentStatement.getBoundingClientRect().bottom
+            + inventory.getBoundingClientRect().height + "px";
+    }
+    else inventory.style.bottom = "0px";
     [...document.querySelectorAll("proof")].forEach((proof) => {
         if (currentStatement != undefined && proof.getBoundingClientRect().bottom < currentStatement.getBoundingClientRect().top) {
             proof.classList.add("hidden");
@@ -83,7 +87,7 @@ document.querySelector("container").addEventListener('scroll', () => {
         else
             th.classList.remove("theoremCurrentlyProven"); */
     });
-    
+
     const statementsInFlow = [...document.querySelectorAll("container statement , container theorem")];
 
     const statementsAfter = statementsInFlow.filter(
@@ -107,13 +111,30 @@ document.querySelector("container").addEventListener('scroll', () => {
     currentStatement.classList.add("current");
 
 
-    const directCause = getDirectCause(currentStatement);
+    updateImplicationArrows();
+    setTimeout(updateImplicationArrows, 500);
+
+
+
+
+});
+
+
+
+
+function updateImplicationArrows() {
+    const currentStatement = getCurrentStatement();
 
     for (const line of lines)
         line.remove();
 
     lines = [];
-    
+
+    if (currentStatement == undefined)
+        return;
+    const directCause = getDirectCause(currentStatement);
+
+
     if (directCause) {
         directCause.classList.add("cause");
         lines.push(new LeaderLine(
@@ -142,9 +163,7 @@ document.querySelector("container").addEventListener('scroll', () => {
             }
         ));
     }
-
-
-});
+}
 
 
 
